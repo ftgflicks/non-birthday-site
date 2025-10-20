@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>Happy Birthday, Non 🎉</title>
+<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg1:#fff0f6;--bg2:#fff8fb;--accent:#ff6fa3;--accent2:#ffb6c1;--thread:#ff9fc9;--paper:#fffefc;--cloud:#fff9ff;
+}
+body{margin:0;min-height:100vh;font-family:Inter;background:radial-gradient(circle at 30% 30%,var(--bg1),var(--bg2));color:#333;overflow-x:hidden}
+
+header{text-align:center;padding:80px 20px;position:relative;overflow:hidden}
+header h1{font-family:Great Vibes,cursive;font-size:72px;color:var(--accent);text-shadow:0 0 20px rgba(255,105,180,.5);opacity:0;animation:titleReveal 3s ease forwards;animation-delay:0.5s;}
+header p{font-size:20px;margin:10px 0;color:#555;opacity:0;animation:fadeIn 3s ease forwards;animation-delay:2.5s;}
+header::before,header::after{content:'💖';position:absolute;font-size:50px;animation:float 6s ease-in-out infinite;opacity:0.5}
+header::before{left:15%;top:10%}
+header::after{right:15%;bottom:10%;animation-delay:3s}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+@keyframes titleReveal{0%{opacity:0;transform:translateY(40px) scale(0.9);}100%{opacity:1;transform:translateY(0) scale(1);}}
+@keyframes fadeIn{0%{opacity:0;}100%{opacity:1;}}
+
+.main{max-width:1500px;margin:auto;padding:60px;position:relative}
+.gallery{position:relative;min-height:900px}
+.photo{position:absolute;transition:transform .5s ease;z-index:2;}
+.photo img{width:280px;height:280px;border-radius:20px;object-fit:cover;box-shadow:0 15px 40px rgba(0,0,0,.1);border:8px solid white;transition:transform 0.4s ease;}
+.photo:hover{transform:translateY(-20px) scale(1.08);z-index:5;}
+.photo:hover .caption{opacity:1;transform:translateY(-30px);}
+.caption{position:absolute;top:-60px;left:50%;transform:translateX(-50%) translateY(0);background:var(--cloud);padding:12px 25px;border-radius:40px;box-shadow:0 6px 25px rgba(0,0,0,.15);opacity:0;transition:all .4s ease;font-weight:bold;color:var(--accent);font-size:16px;}
+
+.thread{position:absolute;top:0;left:0;z-index:1;}
+.hello-kitty{position:absolute;opacity:.9;animation:kittyFloat 8s ease-in-out infinite}
+@keyframes kittyFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+
+footer{text-align:center;padding:60px 10px;font-size:18px;color:#777;font-style:italic;animation:fadeIn 3s ease forwards;animation-delay:3s;}
+</style>
+</head>
+<body>
+<header>
+  <h1>Happy Birthday, Non 🎂</h1>
+  <p>From your TRO — your Pookie, your Starshine ✨</p>
+</header>
+<main class="main">
+  <div class="gallery" id="gallery">
+    <div class="photo" style="top:40px;left:60px;transform:rotate(-2deg);">
+      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80" alt="pic1">
+      <div class="caption">Your smile that started it all 💕</div>
+    </div>
+    <div class="photo" style="top:300px;left:400px;transform:rotate(3deg);">
+      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80" alt="pic2">
+      <div class="caption">Our secret laughter 🎀</div>
+    </div>
+    <div class="photo" style="top:150px;left:780px;transform:rotate(-4deg);">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80" alt="pic3">
+      <div class="caption">The day time stood still ✨</div>
+    </div>
+    <div class="photo" style="top:460px;left:1050px;transform:rotate(2deg);">
+      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80" alt="pic4">
+      <div class="caption">Caught in your glow 💖</div>
+    </div>
+    <div class="photo" style="top:640px;left:250px;transform:rotate(-3deg);">
+      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80" alt="pic5">
+      <div class="caption">The night we danced 🌙</div>
+    </div>
+    <div class="photo" style="top:780px;left:650px;transform:rotate(5deg);">
+      <img src="https://images.unsplash.com/photo-1519340333755-5f8f6d5a9b5f?q=80" alt="pic6">
+      <div class="caption">Rain and you ☔</div>
+    </div>
+    <div class="photo" style="top:400px;left:1200px;transform:rotate(-1deg);">
+      <img src="https://images.unsplash.com/photo-1502136969935-8d5f5a2d9d8a?q=80" alt="pic7">
+      <div class="caption">Endless stories 🌸</div>
+    </div>
+    <div class="photo" style="top:880px;left:980px;transform:rotate(2deg);">
+      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80" alt="pic8">
+      <div class="caption">Forever yours ❤️</div>
+    </div>
+    <img class="hello-kitty" src="https://i.imgur.com/0KXQXcT.png" style="top:20px;right:50px;width:90px;">
+    <img class="hello-kitty" src="https://i.imgur.com/0KXQXcT.png" style="bottom:60px;left:100px;width:70px;">
+  </div>
+</main>
+<footer>Made with infinite love by TRO for NON 💞</footer>
+<audio id="bgAudio" autoplay loop>
+  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8b3f3d7f4d.mp3?filename=soft-piano-ambient-110793.mp3" type="audio/mpeg">
+</audio>
+<script>
+const gallery=document.getElementById('gallery');
+const thread=document.createElement('canvas');
+thread.className='thread';gallery.appendChild(thread);
+const ctx=thread.getContext('2d');
+function drawThreads(){
+ thread.width=gallery.offsetWidth;thread.height=gallery.offsetHeight;
+ const pics=[...gallery.querySelectorAll('.photo')].map(p=>{const r=p.getBoundingClientRect();const gr=gallery.getBoundingClientRect();return{x:r.left+140-gr.left,y:r.top+140-gr.top};});
+ ctx.strokeStyle='rgba(255,160,200,0.6)';ctx.lineWidth=2;ctx.beginPath();
+ for(let i=0;i<pics.length;i++){if(i===0)ctx.moveTo(pics[i].x,pics[i].y);else ctx.lineTo(pics[i].x,pics[i].y);}ctx.stroke();
+}
+window.addEventListener('resize',drawThreads);
+setTimeout(drawThreads,1000);
+</script>
+</body>
+</html>
