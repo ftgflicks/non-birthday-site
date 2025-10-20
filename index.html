@@ -3,228 +3,325 @@
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Happy Birthday, Non 🎉</title>
-<link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+<title>Happy Birthday Non 🎂💞</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Dancing+Script:wght@400;700&family=Inter:wght@300;400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+
 <style>
-:root{
-  --sky1:#e8f4ff; /* pale blue */
-  --sky2:#f7e9f2; /* rose pink tint */
-  --mist:#ffffff; /* soft white mists */
-  --accent:#ff6fa3;
+:root {
+  --cream-1:#fbf6ef;
+  --cream-2:#f3e9dd;
+  --paper-deep:#3f2f26;
+  --gold:#d4af37;
+  --ink:#f8e6c9;
+  --muted:#6b584e;
+  --thread:rgba(212,175,55,0.92);
+  --ambient:rgba(0,0,0,0.35);
 }
+
+/* reset */
 *{box-sizing:border-box}
-body{margin:0;min-height:100vh;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:#222;overflow-x:hidden;background:linear-gradient(180deg,var(--sky1),var(--sky2));}
-
-/* Header */
-header{position:relative;text-align:center;padding:80px 20px 30px;overflow:visible}
-header h1{font-family:Great Vibes,cursive;font-size:72px;color:var(--accent);text-shadow:0 8px 30px rgba(255,111,163,0.18);opacity:0;animation:titleReveal .9s ease forwards .4s}
-header p{font-size:18px;margin:8px 0;color:#4b4b4b;opacity:0;animation:fadeIn 1s ease forwards 1.2s}
-@keyframes titleReveal{from{transform:translateY(30px) scale(.98);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
-@keyframes fadeIn{from{opacity:0}to{opacity:1}}
-
-/* Parallax layers container */
-.parallax{
-  position:fixed;left:0;right:0;top:0;bottom:0;pointer-events:none;z-index:0;overflow:visible;
+body {
+  margin:0;
+  font-family:'Inter',system-ui;
+  color:var(--muted);
+  background:linear-gradient(180deg,var(--cream-1),var(--cream-2));
+  overflow-x:hidden;
+  position:relative;
 }
-.layer{position:absolute;left:0;right:0;will-change:transform;}
-.layer--sky{top:0;height:100vh;background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18), transparent 10%), linear-gradient(180deg,var(--sky1),var(--sky2));opacity:0.95}
 
-/* distant painted clouds (very subtle) */
-.clouds--far{top:6vh;height:60vh;opacity:0.55}
-.clouds--mid{top:18vh;height:60vh;opacity:0.75}
-.clouds--front{top:30vh;height:70vh;opacity:0.9;pointer-events:none}
-.cloud{
-  position:absolute;left:50%;transform:translateX(-50%);width:1600px;height:260px;background:radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 20%, rgba(255,255,255,0.6) 45%, rgba(255,255,255,0.0) 70%);
-  filter:blur(18px);
+/* header */
+header {
+  text-align:center;
+  padding:100px 20px 30px;
 }
-.cloud.s-1{width:1400px;height:200px;left:15%;top:40px;}
-.cloud.s-2{width:1200px;height:220px;left:65%;top:120px;opacity:0.9}
-.cloud.s-3{width:1700px;height:260px;left:40%;top:180px;opacity:0.85}
+header h1 {
+  font-family:'Dancing Script','Playfair Display',cursive;
+  font-size:72px;
+  color:var(--paper-deep);
+  text-shadow:0 4px 15px rgba(0,0,0,0.15);
+  margin:0;
+}
+header p {
+  color:var(--muted);
+  font-size:18px;
+  margin-bottom:20px;
+}
 
-/* watercolor hills (SVG shapes will be used) */
-.hills{position:absolute;left:0;right:0;bottom:0;height:360px;pointer-events:none}
-.hill{position:absolute;left:0;right:0;bottom:0;height:360px}
+/* letter button */
+.letter-btn {
+  display:inline-flex;
+  align-items:center;
+  gap:10px;
+  background:linear-gradient(180deg,#5a3f2f,#3d2a1f);
+  color:var(--ink);
+  border:2px solid rgba(212,175,55,0.15);
+  padding:12px 24px;
+  border-radius:999px;
+  font-size:18px;
+  cursor:pointer;
+  box-shadow:0 10px 25px rgba(0,0,0,0.2);
+  transition:all 0.3s ease;
+}
+.letter-btn:hover { transform:translateY(-5px) scale(1.05); box-shadow:0 15px 35px rgba(0,0,0,0.25); }
 
-/* main content (gallery) stacked above parallax foreground */
-.main{position:relative;z-index:5;max-width:1500px;margin:0 auto;padding:140px 36px 120px}
-.gallery{position:relative;min-height:900px}
-.photo{position:absolute;transition:transform .5s ease, box-shadow .35s ease;z-index:6}
-.photo img{width:280px;height:280px;border-radius:18px;object-fit:cover;box-shadow:0 20px 50px rgba(10,10,10,0.12);border:8px solid rgba(255,255,255,0.95);transition:transform .36s ease}
-.photo:hover{transform:translateY(-20px) scale(1.06);z-index:12}
-.caption{position:absolute;top:-60px;left:50%;transform:translateX(-50%) translateY(0);background:rgba(255,255,255,0.95);padding:12px 22px;border-radius:32px;box-shadow:0 10px 30px rgba(15,15,15,0.12);opacity:0;transition:all .36s ease;font-weight:700;color:var(--accent)}
-.photo:hover .caption{opacity:1;transform:translateX(-50%) translateY(-22px)}
+/* main */
+.main { position:relative; max-width:1400px; margin:60px auto; padding:0 30px; }
+.gallery { position:relative; min-height:2300px; }
 
-/* foreground soft cloud that floats in front of photos */
-.fore-front{position:fixed;left:0;right:0;bottom:0;height:60vh;z-index:8;pointer-events:none;opacity:0.9}
-.front-cloud{position:absolute;width:900px;height:260px;left:55%;transform:translateX(-50%);bottom:120px;background:radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.95), rgba(255,255,255,0.85) 30%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.0) 80%);border-radius:80px;filter:blur(18px);}
-.front-cloud.c1{left:20%;bottom:200px;opacity:0.8}
-.front-cloud.c2{left:60%;bottom:160px;opacity:0.7}
-.front-cloud.c3{left:82%;bottom:260px;opacity:0.65}
+/* photo hover animation */
+.photo {
+  position:absolute;
+  transition:transform 0.6s cubic-bezier(.25,.8,.25,1), filter 0.4s ease;
+}
+.photo img {
+  width:340px; height:340px; object-fit:cover;
+  border-radius:12px;
+  border:8px solid #fff8f2;
+  box-shadow:0 25px 60px rgba(50,40,35,0.18);
+  display:block;
+  filter:grayscale(20%) sepia(10%);
+  transition:transform 0.6s ease, filter 0.6s ease;
+}
+.photo:hover img {
+  transform:scale(1.15) rotate(1deg);
+  filter:grayscale(0%) sepia(0%) brightness(1.1);
+  z-index:10;
+}
 
-/* Hello Kitty + decorative */
-.hk{position:fixed;z-index:20;pointer-events:none;width:96px;opacity:0.95}
-.hk.small{width:58px;opacity:0.85}
+/* vintage caption bubble */
+.caption {
+  position:absolute;
+  top:-85px;
+  left:50%;
+  transform:translateX(-50%) scale(0.95);
+  opacity:0;
+  background:linear-gradient(180deg,#fdf3d8,#f4e0b5);
+  color:#4a3324;
+  font-family:'Great Vibes','Dancing Script',cursive;
+  font-size:26px;
+  padding:14px 26px;
+  border-radius:50px;
+  border:1.5px solid rgba(212,175,55,0.4);
+  box-shadow:0 12px 30px rgba(50,30,10,0.25), inset 0 0 12px rgba(255,235,185,0.4);
+  transition:all 0.4s ease;
+  white-space:nowrap;
+}
+.photo:hover .caption {
+  opacity:1;
+  transform:translateX(-50%) translateY(-12px) scale(1);
+}
 
-/* footer */
-footer{position:relative;z-index:6;text-align:center;padding:40px 10px;color:#666;font-style:italic}
+/* connecting thread */
+canvas.thread {
+  position:absolute; left:0; top:0;
+  z-index:2; pointer-events:none;
+}
 
-/* responsive tweaks (we'll refine mobile later) */
-@media (max-width:1000px){
-  header h1{font-size:44px}
-  .photo img{width:200px;height:200px}
+/* letter overlay */
+.overlay {
+  position:fixed; inset:0;
+  display:flex; align-items:center; justify-content:center;
+  background:rgba(15,10,5,0.65);
+  visibility:hidden; opacity:0;
+  transition:all 0.4s ease;
+  z-index:999;
+}
+.overlay.open { visibility:visible; opacity:1; }
+.scroll-wrap {
+  width:86%; max-width:880px;
+  transform-origin:top;
+  transform:scaleY(0);
+  transition:transform 0.8s ease;
+}
+.overlay.open .scroll-wrap { transform:scaleY(1); }
+.scroll {
+  background:linear-gradient(180deg,#3b2a1c 0%,#2e1f15 100%);
+  border:6px solid rgba(150,110,50,0.8);
+  box-shadow:0 40px 100px rgba(0,0,0,0.6);
+  border-radius:10px;
+  padding:40px;
+  color:#f7e9c2;
+  font-family:'Playfair Display',serif;
+  line-height:1.6;
+  position:relative;
+}
+.parchment {
+  background:linear-gradient(180deg,#a27c4b,#906a3b);
+  padding:30px;
+  border-radius:6px;
+  box-shadow:inset 0 0 25px rgba(0,0,0,0.3);
+  color:#fdf1d8;
+}
+.parchment h2 {
+  color:var(--gold);
+  font-family:'Dancing Script';
+  font-size:38px;
+  margin-top:0;
+  text-shadow:0 3px 12px rgba(212,175,55,0.4);
+}
+.close-btn {
+  position:absolute; right:20px; top:20px;
+  background:linear-gradient(180deg,#3b2a1b,#2b1a10);
+  color:var(--gold);
+  border:none;
+  border-radius:6px;
+  padding:6px 10px;
+  cursor:pointer;
+}
+footer { text-align:center; padding:60px 20px; font-style:italic; color:var(--muted); }
+
+/* floating candle */
+.candle {
+  position:fixed; bottom:50px; left:50%; transform:translateX(-50%);
+  width:20px; height:60px;
+  background:linear-gradient(to top, #e0a84f, #fff1b8);
+  border-radius:4px;
+  box-shadow:0 0 15px rgba(255,200,100,0.7);
+  cursor:pointer;
+  z-index:50;
+}
+.candle.flame {
+  position:absolute; top:-20px; left:50%; width:10px; height:20px;
+  background: radial-gradient(circle, #ffd700 0%, #ff4500 70%, transparent 100%);
+  border-radius:50%;
+  transform:translateX(-50%);
+  animation:flameFlicker 0.3s infinite;
+}
+@keyframes flameFlicker {
+  0% { transform:translateX(-50%) scaleY(1) scaleX(1); opacity:1; }
+  50% { transform:translateX(-50%) scaleY(1.2) scaleX(1.1); opacity:0.9; }
+  100% { transform:translateX(-50%) scaleY(1) scaleX(1); opacity:1; }
+}
+
+/* sparkle effect */
+.sparkle {
+  position:absolute; width:6px; height:6px; background:radial-gradient(circle,#fffacd,#ffd700);
+  border-radius:50%; pointer-events:none; opacity:0;
+  animation:twinkle 1s infinite alternate;
+}
+@keyframes twinkle {
+  from { opacity:0; transform:scale(0.5) rotate(0deg); }
+  to { opacity:1; transform:scale(1.2) rotate(360deg); }
+}
+
+@media (max-width:700px){
+  .photo img { width:220px; height:220px; }
+  .caption { font-size:20px; padding:10px 20px; }
+  header h1{font-size:48px;}
 }
 </style>
 </head>
 <body>
-  <!-- Parallax layers (Moonlit Romance palette) -->
-  <div class="parallax" aria-hidden="true">
-    <div class="layer layer--sky"></div>
 
-    <!-- distant clouds -->
-    <div class="layer clouds--far" id="cloudsFar">
-      <div class="cloud s-1"></div>
-      <div class="cloud s-2"></div>
-    </div>
+<header>
+  <h1>Happy Birthday Non 💖</h1>
+  <p>Made with love, by your TRO</p>
+  <button class="letter-btn" id="openLetterBtn">📜 Open Letter</button>
+</header>
 
-    <!-- mid clouds/hills -->
-    <div class="layer clouds--mid" id="cloudsMid">
-      <div class="cloud s-3"></div>
-    </div>
-
-    <!-- watercolor hills as SVGs (three layers) -->
-    <div class="layer hills" id="hills">
-      <svg viewBox="0 0 1600 360" preserveAspectRatio="none" class="hill" style="z-index:1;opacity:0.95;">
-        <defs>
-          <linearGradient id="g1" x1="0" x2="1">
-            <stop offset="0%" stop-color="#f8f6ff"/>
-            <stop offset="100%" stop-color="#f3e6f5"/>
-          </linearGradient>
-        </defs>
-        <path d="M0,220 C180,140 360,260 600,210 C820,160 980,260 1200,200 C1400,150 1600,220 1600,360 L1600,360 L0,360 Z" fill="url(#g1)"></path>
-      </svg>
-      <svg viewBox="0 0 1600 360" preserveAspectRatio="none" class="hill" style="z-index:2;opacity:0.92;transform:translateY(20px);">
-        <defs>
-          <linearGradient id="g2" x1="0" x2="1">
-            <stop offset="0%" stop-color="#fdeef6"/>
-            <stop offset="100%" stop-color="#fbeefc"/>
-          </linearGradient>
-        </defs>
-        <path d="M0,260 C220,200 420,300 640,250 C860,200 1060,300 1300,240 C1460,200 1600,260 1600,360 L1600,360 L0,360 Z" fill="url(#g2)"></path>
-      </svg>
-      <svg viewBox="0 0 1600 360" preserveAspectRatio="none" class="hill" style="z-index:3;opacity:0.9;transform:translateY(40px);">
-        <defs>
-          <linearGradient id="g3" x1="0" x2="1">
-            <stop offset="0%" stop-color="#eaf6ff"/>
-            <stop offset="100%" stop-color="#f8eef8"/>
-          </linearGradient>
-        </defs>
-        <path d="M0,300 C200,260 420,320 680,280 C920,240 1140,320 1400,280 C1500,260 1600,300 1600,360 L1600,360 L0,360 Z" fill="url(#g3)"></path>
-      </svg>
-    </div>
-
-    <!-- foreground soft clouds that float in front of gallery -->
-    <div class="layer fore-front" id="frontClouds">
-      <div class="front-cloud c1"></div>
-      <div class="front-cloud c2"></div>
-      <div class="front-cloud c3"></div>
+<div class="overlay" id="letterOverlay">
+  <div class="scroll-wrap">
+    <div class="scroll">
+      <button class="close-btn" id="closeLetterBtn">✖</button>
+      <div class="parchment">
+        <h2>To My Non</h2>
+        <p>Happy Birthday my Love, my star and sunshine my cutie patootie muah muah 😘</p>
+        <p>My baby is growing up and I'm so proud of being a part of this process and watching you improve and grow.</p>
+        <p>I LOVE YOU VERY MUCHHH PROBABLY BIGGER THAN A GALAXY 💫</p>
+        <p>It’s been an amazing journey being part of your life. Seeing you graduate, evolve, and grow into someone stronger — it makes me endlessly proud of you.</p>
+        <p>I hope I get to witness many more years yet to come, until you get old and can’t walk so I can princess-carry you everywhere 😝😘😏</p>
+        <p style="margin-top:18px;">Forever yours,<br><strong>TRO</strong></p>
+      </div>
     </div>
   </div>
+</div>
 
-  <!-- Hello Kitty decorations (kept above layers) -->
-  <img class="hk" src="https://i.imgur.com/0KXQXcT.png" style="top:22px;right:34px;">
-  <img class="hk small" src="https://i.imgur.com/0KXQXcT.png" style="bottom:68px;left:84px;">
+<main class="main">
+  <div class="gallery" id="gallery">
+    <div class="photo" style="top:80px; left:110px;"><img src="images/non1.jpg"><div class="caption">Our first spark 💕</div></div>
+    <div class="photo" style="top:420px; left:520px;"><img src="images/non2.jpg"><div class="caption">Your laughter, my melody 🎀</div></div>
+    <div class="photo" style="top:880px; left:960px;"><img src="images/non3.jpg"><div class="caption">Dreamy nights ✨</div></div>
+    <div class="photo" style="top:1340px; left:620px;"><img src="images/non4.jpg"><div class="caption">Caught in your glow 💖</div></div>
+    <div class="photo" style="top:1720px; left:320px;"><img src="images/non5.jpg"><div class="caption">The way you look at me 🌙</div></div>
+    <div class="photo" style="top:2140px; left:840px;"><img src="images/non6.jpg"><div class="caption">My forever muse 💫</div></div>
+    <canvas class="thread" id="threadCanvas"></canvas>
+  </div>
+</main>
 
-  <!-- Main content -->
-  <header>
-    <h1>Happy Birthday, Non 🎂</h1>
-    <p>From your TRO — your Pookie, your Starshine ✨</p>
-  </header>
+<footer>Forever yours, TRO 🌙💞</footer>
 
-  <main class="main" id="content">
-    <div class="gallery" id="gallery">
-      <div class="photo" style="top:40px;left:60px;transform:rotate(-2deg);">
-        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80" alt="pic1">
-        <div class="caption">Your smile that started it all 💕</div>
-      </div>
-      <div class="photo" style="top:300px;left:400px;transform:rotate(3deg);">
-        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80" alt="pic2">
-        <div class="caption">Our secret laughter 🎀</div>
-      </div>
-      <div class="photo" style="top:150px;left:780px;transform:rotate(-4deg);">
-        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80" alt="pic3">
-        <div class="caption">The day time stood still ✨</div>
-      </div>
-      <div class="photo" style="top:460px;left:1050px;transform:rotate(2deg);">
-        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80" alt="pic4">
-        <div class="caption">Caught in your glow 💖</div>
-      </div>
-      <div class="photo" style="top:640px;left:250px;transform:rotate(-3deg);">
-        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80" alt="pic5">
-        <div class="caption">The night we danced 🌙</div>
-      </div>
-      <div class="photo" style="top:780px;left:650px;transform:rotate(5deg);">
-        <img src="https://images.unsplash.com/photo-1519340333755-5f8f6d5a9b5f?q=80" alt="pic6">
-        <div class="caption">Rain and you ☔</div>
-      </div>
-      <div class="photo" style="top:400px;left:1200px;transform:rotate(-1deg);">
-        <img src="https://images.unsplash.com/photo-1502136969935-8d5f5a2d9d8a?q=80" alt="pic7">
-        <div class="caption">Endless stories 🌸</div>
-      </div>
-      <div class="photo" style="top:880px;left:980px;transform:rotate(2deg);">
-        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80" alt="pic8">
-        <div class="caption">Forever yours ❤️</div>
-      </div>
-    </div>
-  </main>
+<div class="candle" id="candle"><div class="flame"></div></div>
 
-  <footer>Made with infinite love by TRO for NON 💞</footer>
-
-  <!-- built-in soft music (keeps playing) -->
-  <audio id="bgAudio" autoplay loop>
-    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8b3f3d7f4d.mp3?filename=soft-piano-ambient-110793.mp3" type="audio/mpeg">
-  </audio>
+<audio id="pianoNote" src="https://cdn.pixabay.com/download/audio/2023/03/03/audio_c2a0c9b8f6.mp3?filename=piano-note-143989.mp3" preload="auto"></audio>
 
 <script>
-// Scroll-driven parallax controller (gentle, noticeable)
-(() => {
-  const cloudsFar = document.getElementById('cloudsFar');
-  const cloudsMid = document.getElementById('cloudsMid');
-  const hills = document.getElementById('hills');
-  const frontClouds = document.getElementById('frontClouds');
-  const gallery = document.getElementById('gallery');
-  let ticking = false;
+/* parallax subtle scroll */
+const gallery=document.getElementById('gallery');
+const thread=document.getElementById('threadCanvas');
+const ctx=thread.getContext('2d');
 
-  function onScroll(){
-    if(!ticking){
-      window.requestAnimationFrame(update);
-      ticking = true;
+function drawThread(){
+  thread.width=gallery.offsetWidth;
+  thread.height=gallery.offsetHeight;
+  const photos=Array.from(gallery.querySelectorAll('.photo')).map(p=>{
+    const r=p.getBoundingClientRect(), g=gallery.getBoundingClientRect();
+    return{x:r.left-g.left+r.width/2,y:r.top-g.top+r.height/2};
+  });
+  ctx.clearRect(0,0,thread.width,thread.height);
+  if(!photos.length) return;
+  ctx.save();
+  ctx.strokeStyle='rgba(212,175,55,0.95)';
+  ctx.lineWidth=4; ctx.lineJoin='round'; ctx.lineCap='round';
+  ctx.shadowBlur=20; ctx.shadowColor='rgba(212,175,55,0.6)';
+  ctx.beginPath();
+  const ordered=photos.slice().sort((a,b)=>a.x-b.x+(a.y-b.y)*0.2);
+  ctx.moveTo(ordered[0].x,ordered[0].y);
+  for(let i=1;i<ordered.length;i++){
+    const p=ordered[i-1], c=ordered[i], cx=(p.x+c.x)/2;
+    ctx.quadraticCurveTo(cx,p.y,c.x,c.y);
+  }
+  ctx.stroke();
+  ctx.fillStyle='rgba(212,175,55,0.95)';
+  for(const p of ordered){ctx.beginPath();ctx.arc(p.x,p.y,5,0,Math.PI*2);ctx.fill();}
+  ctx.restore();
+}
+window.addEventListener('resize',drawThread);
+window.addEventListener('load',()=>setTimeout(drawThread,400));
+setTimeout(drawThread,800);
+
+/* letter open/close */
+const overlay=document.getElementById('letterOverlay');
+const openBtn=document.getElementById('openLetterBtn');
+const closeBtn=document.getElementById('closeLetterBtn');
+const piano=document.getElementById('pianoNote');
+openBtn.onclick=()=>{overlay.classList.add('open'); piano.currentTime=0; piano.volume=0.5; piano.play();};
+closeBtn.onclick=()=>{overlay.classList.remove('open'); piano.pause();};
+window.addEventListener('keydown',e=>{if(e.key==='Escape') overlay.classList.remove('open');});
+
+/* candle interaction */
+const candle=document.getElementById('candle');
+candle.onclick=()=>{const flame=candle.querySelector('.flame'); flame.style.display='none'; candle.style.boxShadow='0 0 0 rgba(255,200,100,0)';};
+
+/* sparkle effect around photos */
+function createSparkle(x,y){
+  const sparkle=document.createElement('div');
+  sparkle.className='sparkle';
+  sparkle.style.left=x+'px';
+  sparkle.style.top=y+'px';
+  document.body.appendChild(sparkle);
+  setTimeout(()=>{sparkle.remove();},1000);
+}
+Array.from(document.querySelectorAll('.photo img')).forEach(img=>{
+  img.addEventListener('mouseenter',e=>{
+    const rect=e.target.getBoundingClientRect();
+    for(let i=0;i<10;i++){
+      const x=rect.left+Math.random()*rect.width;
+      const y=rect.top+Math.random()*rect.height;
+      createSparkle(x,y);
     }
-  }
-
-  function update(){
-    const sc = window.scrollY || window.pageYOffset;
-    // values chosen for gentle but noticeable motion
-    const farSpeed = sc * 0.02;   // slow
-    const midSpeed = sc * 0.045;  // medium
-    const hillSpeed = sc * 0.06;  // a touch more
-    const frontSpeed = sc * 0.09; // noticeable in front
-
-    if(cloudsFar) cloudsFar.style.transform = `translate3d(0, ${farSpeed}px, 0)`;
-    if(cloudsMid) cloudsMid.style.transform = `translate3d(0, ${midSpeed}px, 0)`;
-    if(hills) hills.style.transform = `translate3d(0, ${-hillSpeed}px, 0)`; // hills move opposite to give depth
-    if(frontClouds) frontClouds.style.transform = `translate3d(0, ${frontSpeed}px, 0)`;
-
-    ticking = false;
-  }
-
-  window.addEventListener('scroll', onScroll, {passive:true});
-  // initial update
-  update();
-
-  // also re-draw thread connectors (if any canvas connector exists in gallery code)
-  // small compatibility: if previous thread canvas exists, trigger its redraw if defined globally
-  if(typeof drawThreads === 'function') setTimeout(drawThreads, 600);
-})();
+  });
+});
 </script>
 </body>
 </html>
