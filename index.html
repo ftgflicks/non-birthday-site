@@ -7,95 +7,224 @@
 <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg1:#fff0f6;--bg2:#fff8fb;--accent:#ff6fa3;--accent2:#ffb6c1;--thread:#ff9fc9;--paper:#fffefc;--cloud:#fff9ff;
+  --sky1:#e8f4ff; /* pale blue */
+  --sky2:#f7e9f2; /* rose pink tint */
+  --mist:#ffffff; /* soft white mists */
+  --accent:#ff6fa3;
 }
-body{margin:0;min-height:100vh;font-family:Inter;background:radial-gradient(circle at 30% 30%,var(--bg1),var(--bg2));color:#333;overflow-x:hidden}
+*{box-sizing:border-box}
+body{margin:0;min-height:100vh;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;color:#222;overflow-x:hidden;background:linear-gradient(180deg,var(--sky1),var(--sky2));}
 
-header{text-align:center;padding:80px 20px;position:relative;overflow:hidden}
-header h1{font-family:Great Vibes,cursive;font-size:72px;color:var(--accent);text-shadow:0 0 20px rgba(255,105,180,.5);opacity:0;animation:titleReveal 3s ease forwards;animation-delay:0.5s;}
-header p{font-size:20px;margin:10px 0;color:#555;opacity:0;animation:fadeIn 3s ease forwards;animation-delay:2.5s;}
-header::before,header::after{content:'💖';position:absolute;font-size:50px;animation:float 6s ease-in-out infinite;opacity:0.5}
-header::before{left:15%;top:10%}
-header::after{right:15%;bottom:10%;animation-delay:3s}
-@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
-@keyframes titleReveal{0%{opacity:0;transform:translateY(40px) scale(0.9);}100%{opacity:1;transform:translateY(0) scale(1);}}
-@keyframes fadeIn{0%{opacity:0;}100%{opacity:1;}}
+/* Header */
+header{position:relative;text-align:center;padding:80px 20px 30px;overflow:visible}
+header h1{font-family:Great Vibes,cursive;font-size:72px;color:var(--accent);text-shadow:0 8px 30px rgba(255,111,163,0.18);opacity:0;animation:titleReveal .9s ease forwards .4s}
+header p{font-size:18px;margin:8px 0;color:#4b4b4b;opacity:0;animation:fadeIn 1s ease forwards 1.2s}
+@keyframes titleReveal{from{transform:translateY(30px) scale(.98);opacity:0}to{transform:translateY(0) scale(1);opacity:1}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
 
-.main{max-width:1500px;margin:auto;padding:60px;position:relative}
+/* Parallax layers container */
+.parallax{
+  position:fixed;left:0;right:0;top:0;bottom:0;pointer-events:none;z-index:0;overflow:visible;
+}
+.layer{position:absolute;left:0;right:0;will-change:transform;}
+.layer--sky{top:0;height:100vh;background:radial-gradient(circle at 20% 20%, rgba(255,255,255,0.18), transparent 10%), linear-gradient(180deg,var(--sky1),var(--sky2));opacity:0.95}
+
+/* distant painted clouds (very subtle) */
+.clouds--far{top:6vh;height:60vh;opacity:0.55}
+.clouds--mid{top:18vh;height:60vh;opacity:0.75}
+.clouds--front{top:30vh;height:70vh;opacity:0.9;pointer-events:none}
+.cloud{
+  position:absolute;left:50%;transform:translateX(-50%);width:1600px;height:260px;background:radial-gradient(ellipse at 20% 50%, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 20%, rgba(255,255,255,0.6) 45%, rgba(255,255,255,0.0) 70%);
+  filter:blur(18px);
+}
+.cloud.s-1{width:1400px;height:200px;left:15%;top:40px;}
+.cloud.s-2{width:1200px;height:220px;left:65%;top:120px;opacity:0.9}
+.cloud.s-3{width:1700px;height:260px;left:40%;top:180px;opacity:0.85}
+
+/* watercolor hills (SVG shapes will be used) */
+.hills{position:absolute;left:0;right:0;bottom:0;height:360px;pointer-events:none}
+.hill{position:absolute;left:0;right:0;bottom:0;height:360px}
+
+/* main content (gallery) stacked above parallax foreground */
+.main{position:relative;z-index:5;max-width:1500px;margin:0 auto;padding:140px 36px 120px}
 .gallery{position:relative;min-height:900px}
-.photo{position:absolute;transition:transform .5s ease;z-index:2;}
-.photo img{width:280px;height:280px;border-radius:20px;object-fit:cover;box-shadow:0 15px 40px rgba(0,0,0,.1);border:8px solid white;transition:transform 0.4s ease;}
-.photo:hover{transform:translateY(-20px) scale(1.08);z-index:5;}
-.photo:hover .caption{opacity:1;transform:translateY(-30px);}
-.caption{position:absolute;top:-60px;left:50%;transform:translateX(-50%) translateY(0);background:var(--cloud);padding:12px 25px;border-radius:40px;box-shadow:0 6px 25px rgba(0,0,0,.15);opacity:0;transition:all .4s ease;font-weight:bold;color:var(--accent);font-size:16px;}
+.photo{position:absolute;transition:transform .5s ease, box-shadow .35s ease;z-index:6}
+.photo img{width:280px;height:280px;border-radius:18px;object-fit:cover;box-shadow:0 20px 50px rgba(10,10,10,0.12);border:8px solid rgba(255,255,255,0.95);transition:transform .36s ease}
+.photo:hover{transform:translateY(-20px) scale(1.06);z-index:12}
+.caption{position:absolute;top:-60px;left:50%;transform:translateX(-50%) translateY(0);background:rgba(255,255,255,0.95);padding:12px 22px;border-radius:32px;box-shadow:0 10px 30px rgba(15,15,15,0.12);opacity:0;transition:all .36s ease;font-weight:700;color:var(--accent)}
+.photo:hover .caption{opacity:1;transform:translateX(-50%) translateY(-22px)}
 
-.thread{position:absolute;top:0;left:0;z-index:1;}
-.hello-kitty{position:absolute;opacity:.9;animation:kittyFloat 8s ease-in-out infinite}
-@keyframes kittyFloat{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+/* foreground soft cloud that floats in front of photos */
+.fore-front{position:fixed;left:0;right:0;bottom:0;height:60vh;z-index:8;pointer-events:none;opacity:0.9}
+.front-cloud{position:absolute;width:900px;height:260px;left:55%;transform:translateX(-50%);bottom:120px;background:radial-gradient(ellipse at 30% 50%, rgba(255,255,255,0.95), rgba(255,255,255,0.85) 30%, rgba(255,255,255,0.6) 50%, rgba(255,255,255,0.0) 80%);border-radius:80px;filter:blur(18px);}
+.front-cloud.c1{left:20%;bottom:200px;opacity:0.8}
+.front-cloud.c2{left:60%;bottom:160px;opacity:0.7}
+.front-cloud.c3{left:82%;bottom:260px;opacity:0.65}
 
-footer{text-align:center;padding:60px 10px;font-size:18px;color:#777;font-style:italic;animation:fadeIn 3s ease forwards;animation-delay:3s;}
+/* Hello Kitty + decorative */
+.hk{position:fixed;z-index:20;pointer-events:none;width:96px;opacity:0.95}
+.hk.small{width:58px;opacity:0.85}
+
+/* footer */
+footer{position:relative;z-index:6;text-align:center;padding:40px 10px;color:#666;font-style:italic}
+
+/* responsive tweaks (we'll refine mobile later) */
+@media (max-width:1000px){
+  header h1{font-size:44px}
+  .photo img{width:200px;height:200px}
+}
 </style>
 </head>
 <body>
-<header>
-  <h1>Happy Birthday, Non 🎂</h1>
-  <p>From your TRO — your Pookie, your Starshine ✨</p>
-</header>
-<main class="main">
-  <div class="gallery" id="gallery">
-    <div class="photo" style="top:40px;left:60px;transform:rotate(-2deg);">
-      <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80" alt="pic1">
-      <div class="caption">Your smile that started it all 💕</div>
+  <!-- Parallax layers (Moonlit Romance palette) -->
+  <div class="parallax" aria-hidden="true">
+    <div class="layer layer--sky"></div>
+
+    <!-- distant clouds -->
+    <div class="layer clouds--far" id="cloudsFar">
+      <div class="cloud s-1"></div>
+      <div class="cloud s-2"></div>
     </div>
-    <div class="photo" style="top:300px;left:400px;transform:rotate(3deg);">
-      <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80" alt="pic2">
-      <div class="caption">Our secret laughter 🎀</div>
+
+    <!-- mid clouds/hills -->
+    <div class="layer clouds--mid" id="cloudsMid">
+      <div class="cloud s-3"></div>
     </div>
-    <div class="photo" style="top:150px;left:780px;transform:rotate(-4deg);">
-      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80" alt="pic3">
-      <div class="caption">The day time stood still ✨</div>
+
+    <!-- watercolor hills as SVGs (three layers) -->
+    <div class="layer hills" id="hills">
+      <svg viewBox="0 0 1600 360" preserveAspectRatio="none" class="hill" style="z-index:1;opacity:0.95;">
+        <defs>
+          <linearGradient id="g1" x1="0" x2="1">
+            <stop offset="0%" stop-color="#f8f6ff"/>
+            <stop offset="100%" stop-color="#f3e6f5"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,220 C180,140 360,260 600,210 C820,160 980,260 1200,200 C1400,150 1600,220 1600,360 L1600,360 L0,360 Z" fill="url(#g1)"></path>
+      </svg>
+      <svg viewBox="0 0 1600 360" preserveAspectRatio="none" class="hill" style="z-index:2;opacity:0.92;transform:translateY(20px);">
+        <defs>
+          <linearGradient id="g2" x1="0" x2="1">
+            <stop offset="0%" stop-color="#fdeef6"/>
+            <stop offset="100%" stop-color="#fbeefc"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,260 C220,200 420,300 640,250 C860,200 1060,300 1300,240 C1460,200 1600,260 1600,360 L1600,360 L0,360 Z" fill="url(#g2)"></path>
+      </svg>
+      <svg viewBox="0 0 1600 360" preserveAspectRatio="none" class="hill" style="z-index:3;opacity:0.9;transform:translateY(40px);">
+        <defs>
+          <linearGradient id="g3" x1="0" x2="1">
+            <stop offset="0%" stop-color="#eaf6ff"/>
+            <stop offset="100%" stop-color="#f8eef8"/>
+          </linearGradient>
+        </defs>
+        <path d="M0,300 C200,260 420,320 680,280 C920,240 1140,320 1400,280 C1500,260 1600,300 1600,360 L1600,360 L0,360 Z" fill="url(#g3)"></path>
+      </svg>
     </div>
-    <div class="photo" style="top:460px;left:1050px;transform:rotate(2deg);">
-      <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80" alt="pic4">
-      <div class="caption">Caught in your glow 💖</div>
+
+    <!-- foreground soft clouds that float in front of gallery -->
+    <div class="layer fore-front" id="frontClouds">
+      <div class="front-cloud c1"></div>
+      <div class="front-cloud c2"></div>
+      <div class="front-cloud c3"></div>
     </div>
-    <div class="photo" style="top:640px;left:250px;transform:rotate(-3deg);">
-      <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80" alt="pic5">
-      <div class="caption">The night we danced 🌙</div>
-    </div>
-    <div class="photo" style="top:780px;left:650px;transform:rotate(5deg);">
-      <img src="https://images.unsplash.com/photo-1519340333755-5f8f6d5a9b5f?q=80" alt="pic6">
-      <div class="caption">Rain and you ☔</div>
-    </div>
-    <div class="photo" style="top:400px;left:1200px;transform:rotate(-1deg);">
-      <img src="https://images.unsplash.com/photo-1502136969935-8d5f5a2d9d8a?q=80" alt="pic7">
-      <div class="caption">Endless stories 🌸</div>
-    </div>
-    <div class="photo" style="top:880px;left:980px;transform:rotate(2deg);">
-      <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80" alt="pic8">
-      <div class="caption">Forever yours ❤️</div>
-    </div>
-    <img class="hello-kitty" src="https://i.imgur.com/0KXQXcT.png" style="top:20px;right:50px;width:90px;">
-    <img class="hello-kitty" src="https://i.imgur.com/0KXQXcT.png" style="bottom:60px;left:100px;width:70px;">
   </div>
-</main>
-<footer>Made with infinite love by TRO for NON 💞</footer>
-<audio id="bgAudio" autoplay loop>
-  <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8b3f3d7f4d.mp3?filename=soft-piano-ambient-110793.mp3" type="audio/mpeg">
-</audio>
+
+  <!-- Hello Kitty decorations (kept above layers) -->
+  <img class="hk" src="https://i.imgur.com/0KXQXcT.png" style="top:22px;right:34px;">
+  <img class="hk small" src="https://i.imgur.com/0KXQXcT.png" style="bottom:68px;left:84px;">
+
+  <!-- Main content -->
+  <header>
+    <h1>Happy Birthday, Non 🎂</h1>
+    <p>From your TRO — your Pookie, your Starshine ✨</p>
+  </header>
+
+  <main class="main" id="content">
+    <div class="gallery" id="gallery">
+      <div class="photo" style="top:40px;left:60px;transform:rotate(-2deg);">
+        <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?q=80" alt="pic1">
+        <div class="caption">Your smile that started it all 💕</div>
+      </div>
+      <div class="photo" style="top:300px;left:400px;transform:rotate(3deg);">
+        <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80" alt="pic2">
+        <div class="caption">Our secret laughter 🎀</div>
+      </div>
+      <div class="photo" style="top:150px;left:780px;transform:rotate(-4deg);">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80" alt="pic3">
+        <div class="caption">The day time stood still ✨</div>
+      </div>
+      <div class="photo" style="top:460px;left:1050px;transform:rotate(2deg);">
+        <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80" alt="pic4">
+        <div class="caption">Caught in your glow 💖</div>
+      </div>
+      <div class="photo" style="top:640px;left:250px;transform:rotate(-3deg);">
+        <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?q=80" alt="pic5">
+        <div class="caption">The night we danced 🌙</div>
+      </div>
+      <div class="photo" style="top:780px;left:650px;transform:rotate(5deg);">
+        <img src="https://images.unsplash.com/photo-1519340333755-5f8f6d5a9b5f?q=80" alt="pic6">
+        <div class="caption">Rain and you ☔</div>
+      </div>
+      <div class="photo" style="top:400px;left:1200px;transform:rotate(-1deg);">
+        <img src="https://images.unsplash.com/photo-1502136969935-8d5f5a2d9d8a?q=80" alt="pic7">
+        <div class="caption">Endless stories 🌸</div>
+      </div>
+      <div class="photo" style="top:880px;left:980px;transform:rotate(2deg);">
+        <img src="https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80" alt="pic8">
+        <div class="caption">Forever yours ❤️</div>
+      </div>
+    </div>
+  </main>
+
+  <footer>Made with infinite love by TRO for NON 💞</footer>
+
+  <!-- built-in soft music (keeps playing) -->
+  <audio id="bgAudio" autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2022/03/15/audio_8b3f3d7f4d.mp3?filename=soft-piano-ambient-110793.mp3" type="audio/mpeg">
+  </audio>
+
 <script>
-const gallery=document.getElementById('gallery');
-const thread=document.createElement('canvas');
-thread.className='thread';gallery.appendChild(thread);
-const ctx=thread.getContext('2d');
-function drawThreads(){
- thread.width=gallery.offsetWidth;thread.height=gallery.offsetHeight;
- const pics=[...gallery.querySelectorAll('.photo')].map(p=>{const r=p.getBoundingClientRect();const gr=gallery.getBoundingClientRect();return{x:r.left+140-gr.left,y:r.top+140-gr.top};});
- ctx.strokeStyle='rgba(255,160,200,0.6)';ctx.lineWidth=2;ctx.beginPath();
- for(let i=0;i<pics.length;i++){if(i===0)ctx.moveTo(pics[i].x,pics[i].y);else ctx.lineTo(pics[i].x,pics[i].y);}ctx.stroke();
-}
-window.addEventListener('resize',drawThreads);
-setTimeout(drawThreads,1000);
+// Scroll-driven parallax controller (gentle, noticeable)
+(() => {
+  const cloudsFar = document.getElementById('cloudsFar');
+  const cloudsMid = document.getElementById('cloudsMid');
+  const hills = document.getElementById('hills');
+  const frontClouds = document.getElementById('frontClouds');
+  const gallery = document.getElementById('gallery');
+  let ticking = false;
+
+  function onScroll(){
+    if(!ticking){
+      window.requestAnimationFrame(update);
+      ticking = true;
+    }
+  }
+
+  function update(){
+    const sc = window.scrollY || window.pageYOffset;
+    // values chosen for gentle but noticeable motion
+    const farSpeed = sc * 0.02;   // slow
+    const midSpeed = sc * 0.045;  // medium
+    const hillSpeed = sc * 0.06;  // a touch more
+    const frontSpeed = sc * 0.09; // noticeable in front
+
+    if(cloudsFar) cloudsFar.style.transform = `translate3d(0, ${farSpeed}px, 0)`;
+    if(cloudsMid) cloudsMid.style.transform = `translate3d(0, ${midSpeed}px, 0)`;
+    if(hills) hills.style.transform = `translate3d(0, ${-hillSpeed}px, 0)`; // hills move opposite to give depth
+    if(frontClouds) frontClouds.style.transform = `translate3d(0, ${frontSpeed}px, 0)`;
+
+    ticking = false;
+  }
+
+  window.addEventListener('scroll', onScroll, {passive:true});
+  // initial update
+  update();
+
+  // also re-draw thread connectors (if any canvas connector exists in gallery code)
+  // small compatibility: if previous thread canvas exists, trigger its redraw if defined globally
+  if(typeof drawThreads === 'function') setTimeout(drawThreads, 600);
+})();
 </script>
 </body>
 </html>
